@@ -1,19 +1,19 @@
 <?php 
 	const $registrado = array(
-		'basedatos' => 'itepwwnl_ong',
+		'basedatos' => 'ong',
 		'usuario' => 'root',
-		'pass' => 'renaido'
+		'pass' => ''
 	);
 
 	$admin = array(
-		'basedatos' => 'itepwwnl_ong',
+		'basedatos' => 'ong',
 		'usuario' => 'root',
-		'pass' => 'renaido'
+		'pass' => ''
 	);
 
 	const $gestor = array(
-		'basedatos' => 'itepwwnl_ong',
+		'basedatos' => 'ong',
 		'usuario' => 'root',
-		'pass' => 'renaido'
+		'pass' => ''
 	);
 ?>
