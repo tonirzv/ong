@@ -1,0 +1,41 @@
+
+<div class="row">
+	<div class="col-md-4" ng-repeat="tienda in tiendas">
+		<div class="panel panel-default mitienda">
+			<div class="panel-body">
+				<h3>{{tienda.nombre}}</h3>
+				<p>Nombre: {{tienda.nombre}}</p>
+				<p>Dirección: {{tienda.direccion}}</p>
+				<p>CP: {{tienda.cp}}</p>
+				<p>Ciudad: {{tienda.ciudad}}</p>
+				<p>Teléfono: {{tienda.telefono}}</p>
+				<p>Correo electrónico: {{tienda.correo}}</p>
+				<p>Fax: {{tienda.fax}}</p>
+				<p><button class="btn btn-primary" ng-click="mostrarMapa()"><span class="glyphicon glyphicon-map-marker"></span> Ver mapa</button></p>
+			</div>
+		</div>
+	</div>
+</div>
+ 
+<!-- modal del mapa -->
+<div id="mMapa" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-center">Ubicación - {{tienda.nombre}}</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="angular-google-map-container">
+			 <google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" control="map.control">
+			    <markers models="map.markers" coords="'self'" options="'options'" isLabel='true'>
+			    </markers>
+			</google-map>
+      	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" >Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

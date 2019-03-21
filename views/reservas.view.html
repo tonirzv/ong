@@ -1,0 +1,94 @@
+<div class="panel panel-primary text-center">
+	<div class="panel-heading">
+	  Buscar por fecha
+	</div>
+	<div class="panel-body">
+	    <div class="row">
+                <div class="col-md-5">
+                    <div class="input-group spanfiltro">
+                      <span class="input-group-addon spanfiltro" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span> Desde</span>
+                      <input id="fecha1" type="date" class="filtrofecha form-control" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="input-group spanfiltro">
+                    <span class="input-group-addon spanfiltro" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span> Hasta </span>
+                    <input id="fecha2" type="date" class="filtrofecha form-control" aria-describedby="basic-addon1">
+                  </div>
+                </div>
+                <div class="col-md-2">
+				  <button class="btn btn-primary" ng-click="filtrar()">
+				          <i class="fas fa-search"></i>
+				          Buscar
+				  </button>
+				</div>
+          </div>
+	</div>
+	
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="text-center">
+			<span class="glyphicon glyphicon-th-list"></span> 
+			Listado de reservas de eventos
+		</h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responsive">
+			<table class="table table-condensed">
+				<caption class="text-center">Reservas Eventos</caption>
+				<tr>
+					<th>ID</th>
+					<th>Usuario</th>
+					<th>Evento</th>
+					<th>Cantidad</th>
+					<th>Precio total</th>
+					<th>Fecha reserva</th>
+				</tr>
+				<tr ng-repeat="reservaEvento in reservasEventos">
+					<td>{{reservaEvento.id}}</td>
+					<td>{{reservaEvento.usuario}}</td>
+					<td>{{reservaEvento.evento}}</td>
+					<td>{{reservaEvento.cantidad}}</td>
+					<td>{{reservaEvento.precioTotal | euros:'€'}}</td>
+					<td>{{reservaEvento.fecha | vfecha}}</td>
+				</tr>
+			</table>	
+		</div>		
+	</div>
+</div>
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="text-center">
+			<span class="glyphicon glyphicon-th-list"></span> 
+			Listado de reservas de productos
+		</h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responsive">
+			<table class="table table-condensed">
+				<caption class="text-center">Reservas de productos</caption>
+				<tr>
+					<th>ID</th>
+					<th>Producto</th>
+					<th>Usuario</th>
+					<th>Tienda</th>
+					<th>Cantidad</th>
+					<th>Precio total</th>
+					<th>Fecha reserva</th>
+				</tr>
+				<tr ng-repeat="reservaProducto in reservasProductos">
+					<td>{{reservaProducto.id}}</td>
+					<td>{{reservaProducto.producto.nombre}}</td>
+					<td>{{reservaProducto.usuario}}</td>
+					<td>{{reservaProducto.tienda}}</td>
+					<td>{{reservaProducto.cantidad}}</td>
+					<td>{{reservaProducto.precioTotal | euros:'€'}}</td>
+					<td>{{reservaProducto.fecha}}</td>
+				</tr>
+			</table>	
+		</div>		
+	</div>
+</div>

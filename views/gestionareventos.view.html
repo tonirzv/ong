@@ -1,0 +1,357 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="text-center">
+			<span class="glyphicon glyphicon-th-list"></span> 
+			Gestión de eventos
+		</h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responsive">
+			<table class="table table-condensed">
+				<caption class="text-center">eventos <span class="badge">{{cantidad}}</span></caption>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th>Descripción</th>
+					<th class="text-center">Imagen</th>
+					<th>Entradas disponibles</th>
+					<th>PVP</th>
+					<th>Lugar</th>
+					<th>Fecha definitiva</th>
+					<th></th>
+					<th class="text-center">
+						<button ng-click="agregar()" class="btn btn-success longitudevento"><span class="glyphicon glyphicon-plus"></span>  Nuevo</button><br>
+						<button ng-click="agregarExistente()" class="btn btn-success longitudevento"><span class="glyphicon glyphicon-plus"></span>  Existente</button>
+					</th>
+				</tr>
+				<tr ng-repeat="evento in eventos">
+					<td>{{evento.id}}</td>
+					<td>{{evento.nombre}}</td>
+					<td>{{evento.descripcion}}</td>
+					<td class="text-center"><img src="img/eventos/{{evento.ruta}}" height="100px" alt="{{evento.ruta}}"></td>
+					<td class="text-center">{{evento.entradasdisponibles}}</td>
+					<td>{{evento.precioentrada}}</td>
+					<td>{{evento.lugar.nombre}}</td>
+					<td>
+						<input type="date" ng-show="evento.fecha != ''" ng-model="evento.fecha" disabled>
+					</td>
+					<td class="text-center">
+					<td class="text-center">
+						<button ng-click="modifica()" class="btn btn-primary btn-xs longitudevento">
+							<span class="glyphicon glyphicon-edit"></span>
+							 Evento
+						</button><br>
+						<button class="btn btn-warning btn-xs longitudevento" ng-click="adminParticipantes()">
+							<span class="glyphicon glyphicon-edit"></span>
+							  Participantes
+						</button><br>
+						<button class="btn btn-success btn-xs longitudevento" ng-click="escogeFecha()">
+							<span class="glyphicon glyphicon-edit"></span>
+							  Fechas
+						</button>
+						<button class="btn btn-info btn-xs longitudevento" ng-click="subirImagen()">
+							<span class="glyphicon glyphicon-edit"></span>
+							  Imagen
+						</button>
+					</td>
+				</tr>
+			</table>	
+		</div>		
+	</div>
+</div>
+<!-- Mi modal -->
+<div class="modal fade" id="mRef" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header {{modal.bcolor}}">
+        <h4 ng-model="modal.datos.referencia" class="modal-title" id="titboton">
+        	<span class="pull-left glyphicon glyphicon-pencil"></span>{{modal.opcion}} | {{modal.datos.nombre}}
+          <span class="pull-right" >{{modal.fecha}}</span>
+		</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="panel {{modal.pcolor}}">
+      		<div class="panel-body">
+        		<div class="row">
+	        		<div class="col-md-6">
+	        			<div class="form-group" ng-if="disabledNombre">
+	        				<label for="nombre">Nombre </label>
+	        				<input type="text" class="form-control"  ng-model="modal.datos.nombre">
+	        			</div>
+	        		</div>
+	        	</div>
+        		<div class="row">
+	        		<div class="col-md-9">
+	           			<div class="form-group" ng-if="disabledDescripcion">
+	        				<label for="descripcion">Descripcion</label>
+	        				<input ng-model="modal.datos.descripcion"  type="text" class="form-control">
+	        			</div>
+	        		</div>
+	        		<div class="col-md-3">
+	        			<div class="form-group" ng-if="disabledEntradasDisp">
+	        				<label for="categoria">Aforo </label></br>
+	        				<input ng-model="modal.datos.aforo" type="text" class="form-control">
+	        			</div>
+	        		</div>	
+        		</div>
+	           	<div class="row">
+	           		<div class="col-md-4">
+	           			<div class="form-group" ng-if="disabledEntradasDisp">
+	        				<label for="categoria">Entradas disponibles </label></br>
+	        				<input ng-model="modal.datos.entradasdisponibles" type="text" class="form-control">
+	        			</div>
+	           		</div>
+	           		<div class="col-md-4">
+	           			<div class="form-group" ng-if="disabledPrecioEntrada">
+	        				<label for="fecha">Precio por entrada </label>
+	        				<input ng-model="modal.datos.precioentrada" type="text" class="form-control">
+	        			</div>
+	           		</div>
+	           		<div class="col-md-4">
+	        			<div class="form-group" ng-if="disabledLugar">
+	        				<label for="lugar">Lugar </label><br>
+	        				<select name="lugar" ng-model="modal.datos.lugar" class="custom-select">
+		  						<option  ng-repeat="lugar in lugares" value="{{lugar.id}}">
+		  						{{lugar.lugar}}
+		  						</option>
+							</select>
+	        			</div>
+	           		</div>
+	           	</div>
+	           	<div class="row" ng-if="disabledFechaDef">
+	        		<div class="col-md-6">
+	        			<div class="form-group" ng-if="disabledFechas">
+	        				<label for="fechasp">Fechas posibles </label></br>
+	        				<p ng-repeat="fechap in modal.datos.fechasPosibles">
+	        					<input type="date" ng-model="fechap" disabled>
+	        				</p>
+	        			</div>
+	        		</div>	
+	        		
+	           		<div class="col-md-6">
+	           			<div class="form-group" ng-if="disabledFechasPosibles">
+	        				<label for="fecha">Proponer nueva fecha</label>
+	        				<input type="date" class="form-control" id="fechapropuesta" ng-model="modal.datos.fechapropuesta">
+	        			</div>
+	           		</div>
+	           	</div>
+      		</div>
+      	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><span class="
+        	glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+        <button type="button" ng-click="accion()" class="btn {{modal.cboton}}" name="enviar" id="guarda">
+			<i class="fas fa-check-circle"></i>
+        {{modal.boton}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal 2 -->
+<div class="modal fade" id="mRef2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header {{modal.bcolor}}">
+        <h4 ng-model="modal.datos.referencia" class="modal-title text-center" id="titboton">
+        	<span class="pull-left glyphicon glyphicon-pencil"></span> {{modal.opcion}}
+		</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="row">
+      		<div class="col-md-6 tablaparticipantes">
+      			<h4 class="text-center participanteseliminar">
+					<i class="fas fa-users"></i>
+					Seleccione los participantes a eliminar 
+					<i class="fas fa-angle-down pull-right"></i> 
+				</h4>
+      			<table class="table table-fixed">
+      				<thead>
+      					<tr>  				
+	      					<th>Participante</th>
+	      					<th>Grupo</th>
+	      					<th>Telefono</th>
+	      					<th></th>
+      					</tr>
+      				</thead>
+      				<tbody>
+	  					<tr ng-repeat="participanteEvento in modal.datos.participantesEvento" ng-style="myStyle">
+	  						<td>
+		  						{{participanteEvento.nombre}} {{participanteEvento.apellido1}}
+	  						</td>
+	  						<td>{{participanteEvento.grupo.nombre}}</td>
+	  						<td>{{participanteEvento.telefono}}</td>
+	  						<td>
+	  							<button class="btn btn-danger btn-xs"   ng-click="myStyle={'background-color':'red','color':'#FFF'};agregarAeliminar()">
+		  							<span class="glyphicon glyphicon-remove-circle"></span>
+		  						</button> 
+	  						</td>
+	  					</tr>
+      				</tbody>
+      			</table>
+      		</div>
+      		<div class="col-md-6 tablaparticipantes">
+      		<h4 class="text-center participantesagregar">
+				<i class="fas fa-users"></i>
+				Seleccione los participantes a agregar 
+				<i class="fas fa-angle-down pull-right"></i> 
+			</h4>
+      		<table class="table table-fixed">
+      			<thead>
+      					<tr>  				
+	      					<th>Participante</th>
+	      					<th>Grupo</th>
+	      					<th>Telefono</th>
+	      					<th></th>
+      					</tr>
+      				</thead>
+      		<tbody class="tablaparticipantes">
+      			<tr ng-repeat="participanteAgregar in participantesAgregar" ng-style="myStyle2">
+	  				<td>
+		  				{{participanteAgregar.nombre}} {{participanteAgregar.apellido1}}
+	  				</td>
+	  				<td>{{participanteAgregar.grupo.nombre}}</td>
+	  				<td>{{participanteAgregar.telefono}}</td>
+	  				<td>
+	  					<button class="btn btn-success btn-xs"   ng-click="myStyle2={'background-color':'green','color':'#FFF'};agregarAagregar()">
+		  					<span class="glyphicon glyphicon-plus"></span>
+		  				</button> 
+	  				</td>
+	  			</tr>
+      		</tbody>
+      	</table>
+      		</div>
+      	</div>
+      	
+
+      	
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+        <button class="btn btn-primary" ng-click="guardarParticipantes()" data-dismiss="modal">
+        <span class="glyphicon glyphicon-floppy-saved"></span>
+       	 Guardar
+    	</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 3 -->
+<div class="modal fade" id="mRef3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header {{modal.bcolor}}">
+        <h4 ng-model="modal.datos.referencia" class="modal-title" id="titboton">
+        	<span class="pull-left glyphicon glyphicon-pencil"></span> {{modal.opcion}}
+		</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="panel panel-default">
+      		<div class="panel-heading">
+      			Escoge un evento
+      		</div>
+      		<div class="panel-body">
+      			<div class="row">
+      				<div class="col-md-12">	
+      					<div class="form-group">
+		        			<label for="evento">Evento </label><br>
+		        			<select ng-model="modal.datos.eventoid" class="custom-select" required>
+			  					<option  ng-repeat="evento in eventosexistentes" value="{{evento.id}}">
+			  					{{evento.id}} - {{evento.nombre}}
+			  					</option>
+							</select>
+		        		</div>
+      				</div>
+      				<div class="col-md-12">	
+      					<div class="form-group">
+		        			<label for="producto">Lugar </label><br>
+		        			<select ng-model="modal.datos.lugar" class="custom-select">
+			  					<option  ng-repeat="lugar in lugares" value="{{lugar.id}}">
+			  					{{lugar.id}} - {{lugar.lugar}}
+			  					</option>
+							</select>
+		        		</div>
+      				</div>
+      			</div>
+      			<div class="row">
+      				<div class="col-md-6">
+						<div class="form-group">
+	        				<label for="categoria">Entradas disponibles </label></br>
+	        				<input ng-model="modal.datos.entradasdisponibles" type="text" class="form-control">
+	        			</div>
+      				</div>
+        			<div class="col-md-6">
+	           			<div class="form-group">
+	        				<label for="fecha">Precio por entrada </label>
+	        				<input ng-model="modal.datos.precioentrada" type="text" class="form-control">
+	        			</div>
+        			</div>
+        			<div class="col-md-6">
+	        			<div class="form-group">
+	        				<label for="categoria">Aforo </label></br>
+	        				<input ng-model="modal.datos.aforo" type="text" class="form-control">
+	        			</div>
+        			</div>
+        			<div class="col-md-6">
+	           			<div class="form-group">
+	        				<label for="fecha">Fecha posible</label>
+	        				<input type="date" class="form-control" ng-model="modal.datos.fechapropuesta">
+	        			</div>
+        			</div>
+      			</div>
+      		</div>
+      	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+        <button type="button" ng-click="accion()" class="btn {{modal.cboton}}" name="enviar" id="guarda">
+		<i class="fas fa-check-circle"></i> 
+        {{modal.boton}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+	
+
+
+
+<div class="modal fade" id="mRef4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header {{modal.bcolor}}">
+        <h4 ng-model="modal.datos.referencia" class="modal-title" id="titboton">
+        	<span class="pull-left"  class="glyphicon glyphicon-pencil"></span>{{modal.opcion}}  {{modal.datos.nombre}}
+          <span class="pull-right" >{{modal.fecha}}</span>
+		</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="panel {{modal.pcolor}}">
+      		<div class="panel-body">
+		      <div class="row">
+		      	<div class="col-md-12">
+				<form class="text-center">
+	                <input type="file" name="files" subir-imagen="file"/><br>
+            	</form>
+		      	</div>
+		      </div>
+      		</div>
+      	</div>
+      </div>
+      <div class="modal-footer text-center">
+       <button class="btn btn-info upload" ng-click="accion()">
+			<span class="glyphicon glyphicon-cloud-upload"></span>
+			{{modal.boton}}
+		</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+	

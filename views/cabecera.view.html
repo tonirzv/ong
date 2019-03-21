@@ -1,0 +1,101 @@
+<!-- menu -->
+<div class="home">
+	    <div class="row">
+	    	<div class="col-md-12 text-center">
+				
+	    	</div>
+	    </div>
+		<nav class="navbar navbar-default cabecera">
+		  <div class="container-fluid">
+		    <!-- Brand and toggle get grouped for better mobile display -->
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="sr-only">Toggle navigation</span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a href="#home">
+					<span class="mybrand"><img src="img/imagenes/logo.png" alt="logo.png" class="logofoto"></span>
+				</a>
+		    </div>
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav navbar-left">
+		      	<li><a href="#productos"><i class="fas fa-shopping-bag"></i> Productos</a></li>
+		        <li><a href="#eventos"><i class="fas fa-users"></i> Eventos</a></li>
+		        <li><a href="#tiendas"><i class="fas fa-warehouse"></i> Nuestras tiendas</a></li>
+		      </ul>
+		      <ul class="nav navbar-nav navbar-right">
+		      	<li  ng-if="mylogin">
+		      			<a href ng-click="logear()">
+		      			<span class="glyphicon glyphicon-log-in"></span>
+		      				Iniciar sesión 
+		      			</a>
+		      	</li> 
+		      	<li ng-if="registro">
+		      		<a href="#registro">
+		      		<span class="glyphicon glyphicon-list-alt"></span>
+		      		 Registrarse
+		      		</a>
+		      	</li>
+		      	<li ng-if="misreservas">
+		      		<a role="button" href="#mis-reservas" class="btn btn-info btn-sm misreservas">
+	      					<i class="fas fa-shopping-basket"></i>
+	      					Mis reservas
+		      		</a>
+		      	</li>
+		        <li class="dropdown" ng-if="loged">
+		          <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> {{datosUsuario.nombre}} <i class="fas fa-sort-down"></i></a>
+		          <ul class="dropdown-menu text-center">
+		            <li><a href="#perfil"><i class="fas fa-user-circle"></i> Perfil</a></li>
+		            <li ng-if="reservas"><a href="#reservas"><i class="fas fa-shipping-fast"></i> Reservas</a></li>
+		            <li ng-if="gestor"><a href="#gestion-productos"><i class="fas fa-warehouse"></i> Gestionar productos</a></li>
+		            <li ng-if="gestor"><a href="#gestion-participantes"><i class="fas fa-warehouse"></i> Gestionar participantes</a></li>
+		            <li ng-if="gestor"><a href="#gestion-eventos"><i class="fas fa-users"></i> Gestionar eventos</a></li>
+		            <li ng-if="gestor"><a href="#gestion-grupos"><i class="fas fa-users"></i> Gestionar grupos</a></li>
+		            <li ng-if="admin"><a href="#admin-productos"><i class="fas fa-warehouse"></i> Administrar productos</a></li>
+		            <li ng-if="admin"><a href="#admin-eventos"><i class="fas fa-users"></i> Administrar eventos</a></li> 
+		            <li ng-if="admin"><a href="#admin-tiendas"><i class="fas fa-users"></i> Administrar tiendas</a></li>
+		            <li><a href ng-click="logout()"><i class="fas fa-sign-out-alt"></i> Salir</a></li>
+		          </ul>
+		        </li>
+		        </ul>                                
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+</div>
+
+<!-- Mi modal -->
+<div class="modal fade" id="mLog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header {{modal.bcolor}}">
+        <h4 ng-model="modal.datos.referencia" class="modal-title" id="titboton">
+        	<h3 class="text-center mybrand">guauONG</h3>
+		</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="row formlogin">
+			<div class="panel panel-default login">
+				<div class="panel-heading">
+				</div>
+				<div class="panel-body">
+					<div class="input-group input-group-lg">
+					  <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span></span>
+					  <input type="text" class="form-control" ng-model="email" placeholder="e-mail" aria-describedby="sizing-addon1">		
+					</div>
+					<div class="input-group input-group-lg">
+					  <span class="input-group-addon" id="sizing-addon1"><i class="fas fa-key"></i></span>
+					  <input type="password" class="form-control" ng-model="password" placeholder="Contraseña" aria-describedby="sizing-addon1">		
+					</div>
+				</div>
+				<div class="panel-footer text-center">
+					<button ng-click="login()" class="btn btn-primary"><span class="glyphicon glyphicon-log-in"></span> Entrar</button><br><br>
+					<p>¿No tienes cuenta? <a href="#registro" ng-click="cerrar()">Registrarse</a></p>
+				</div>
+			</div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>

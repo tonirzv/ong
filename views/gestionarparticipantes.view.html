@@ -1,0 +1,142 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="text-center">
+			<span class="glyphicon glyphicon-th-list"></span> 
+			Gestión de participantes
+		</h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responsive">
+			<table class="table table-condensed">
+				<caption class="text-center">Participantes <span class="badge">{{cantidad}}</span></caption>
+				<tr>
+					<th>ID</th>
+					<th>Nombre</th>
+					<th class="text-center">NIF</th>
+					<th class="text-right">EMAIL</th>
+					<th class="text-center">TELEFONO</th>
+					<th>DIRECCIÓN</th>
+					<th>LOCALIDAD</th>
+					<th>PROVINCIA</th>
+					<th>GRUPO</th>
+					<th class="text-center"><button ng-click="agregar()" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nuevo participante</button></th>
+				</tr>
+				<tr ng-repeat="participante in participantes">
+					<td>{{participante.id}}</td>
+					<td>{{participante.nombre}} {{participante.apellido1}} {{participante.apellido2}}</td>
+					<td class="text-center">{{participante.nif}}</td>
+					<td>{{participante.email}}</td>
+					<td>{{participante.telefono}}</td>
+					<td>{{participante.direccion}}</td>
+					<td>{{participante.localidad}}</td>
+					<td>{{participante.provincia}}</td>
+					<td>{{participante.grupo.nombre}}</td>
+					<td class="text-center">
+						<button ng-click="modifica()" class="btn btn-primary">
+							<span class="glyphicon glyphicon-pencil"></span>
+							 Participante
+						</button>
+					</td>
+				</tr>
+			</table>	
+		</div>		
+	</div>
+</div>
+<!-- Mi modal -->
+<div class="modal fade" id="mRef" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header {{modal.bcolor}}">
+        <h4 ng-model="modal.datos.referencia" class="modal-title" id="titboton">
+        	<span class="pull-left"  class="glyphicon glyphicon-pencil"></span>{{modal.opcion}} | {{modal.datos.nombre}}
+          <span class="pull-right" >{{modal.fecha}}</span>
+		</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="panel {{modal.pcolor}}">
+      		<div class="panel-body">
+		        <form id="formModal">
+	        		<div class="row">
+		        		<div class="col-md-4">
+		        			<div class="form-group">
+		        				<label for="nombre">Nombre </label>
+		        				<input type="text" class="form-control" id="nombre" ng-model="modal.datos.nombre" required>
+		        			</div>
+		        		</div>
+		        		<div class="col-md-4">
+		           			<div class="form-group">
+		        				<label for="apellido1">Apellido 1</label>
+		        				<input ng-model="modal.datos.apellido1" type="text" class="form-control" id="apellido1" required>
+		        			</div>
+		        		</div>
+		        		<div class="col-md-4">
+		           			<div class="form-group">
+		        				<label for="apellido2">Apellido 2</label>
+		        				<input ng-model="modal.datos.apellido2" type="text" class="form-control" id="apellido2" required>
+		        			</div>
+		        		</div>
+		        	</div>
+	        		<div class="row">
+	        			<div class="col-md-4">
+		        			<div class="form-group">
+		        				<label for="nif">NIF </label>
+		        				<input type="text" class="form-control" id="nif" ng-model="modal.datos.nif">
+		        			</div>
+	        			</div>
+	        			<div class="col-md-4">
+		        			<div class="form-group">
+		        				<label for="email">e-mail</label>
+		        				<div class="input-group">
+		        					<input ng-model="modal.datos.email" type="text" class="form-control" id="email" required>
+		        				</div>
+		        			</div>
+	        			</div>
+	        			<div class="col-md-4">
+		        			<div class="form-group">
+		        				<label for="telefono">Telefono </label>
+		        				<input ng-model="modal.datos.telefono" type="text" class="form-control" id="telefono" required>
+		        			</div>
+	        			</div>
+	        		</div>
+		           	<div class="row">
+		           		<div class="col-md-4">
+		           			<div class="form-group">
+		        				<label for="direccion">Dirección </label><br>
+		        				<input ng-model="modal.datos.direccion" type="text" class="form-control" id="direccion" required>
+		        			</div>
+		           		</div>
+		           		<div class="col-md-4">
+		           			<div class="form-group">
+		        				<label for="provincia">Provincia </label>
+		        				<input ng-model="modal.datos.provincia" type="text" class="form-control" id="provincia" required>
+		        			</div>
+		           		</div>
+		           		<div class="col-md-4" ng-if="mostrarA">
+		           			<label for="grupo">Grupo </label><br>
+		           			<select name="grupo" ng-model="modal.datos.grupo.id" class="custom-select">
+		  						<option  ng-repeat="grupo in grupos" value="{{grupo.id}}">
+		  						{{grupo.nombre}}
+		  						</option>
+							</select>
+		           		</div>
+		           		<div class="col-md-4" ng-if="mostrarB">
+		           			<label for="grupo">Grupo </label><br>
+		           			<select name="grupo" ng-model="modal.datos.idgrupo" class="custom-select">
+		  						<option  ng-repeat="grupo in grupos" value="{{grupo.id}}">
+		  						{{grupo.nombre}}
+		  						</option>
+							</select>
+		           		</div>
+		           	</div>
+		        </form>
+      		</div>
+      	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><span class="	glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+        <button type="button" ng-click="accion()" class="btn {{modal.cboton}}" name="enviar" id="guarda">{{modal.boton}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+	

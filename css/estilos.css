@@ -1,0 +1,413 @@
+@import url('https://fonts.googleapis.com/css?family=Poiret+One');
+
+
+body{
+  margin-top: 10px;
+}
+/*fondo web*/
+.logofoto {
+margin-top:30px;
+color: black;
+margin:0 auto;
+width: 60px;
+}
+
+.tituloweb2 {
+  font-family: 'Poiret One', cursive;
+  margin-bottom: 20px;
+}
+
+
+
+
+
+.cabecera {
+  border-radius: 15px !important;
+}
+
+#carousel-example-generic {
+  border-radius: 20px !important;
+}
+/*mi marca*/
+.mybrand {
+	border-radius: 5px;
+ 	border-bottom-left-radius: 20px;
+	background: #fff;
+	padding: 3px;
+	font-family: 'Poiret One', cursive;
+  margin-left: 20px;
+  font-size: 20px;
+}
+.mybrand a{
+  color: black;
+}
+/*login.html*/
+.loginhtml {
+  margin-top: 70px;
+}
+
+.login {
+  width: auto;
+	margin:0 auto;
+  border:0px solid #377BB5;
+}
+
+.logintitulo {
+  font-family: 'Poiret One', cursive;
+  color: #377BB5;
+  margin-bottom: 50px;
+  font-size:2em;
+}
+
+
+.login .input-group {
+	margin-bottom: 20px;
+}
+
+.login .panel-heading {
+  font-size:1.5em;
+  background: #FFF;
+  padding: 0px;
+}
+
+.login .panel-body span, .login .panel-body i,.login .panel-body  input {
+  color: #377BB5;
+}
+
+.login .panel-footer {
+  background: #FFF;
+}
+
+
+#logear {
+	background:#377BB5;
+	border:1px solid #377BB5;
+}
+
+.formlogin {
+  width: 100%;
+  margin:0 auto;
+}
+
+
+/*cabecera.view.html*/
+.navbar {
+  border-radius: 0px;
+}
+
+.misreservas {
+  margin-top: 10px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  border: 2px solid #FFF;
+}
+
+.misreservas:hover {
+  background:#FFF !important;
+  color: #5FC0DD !important;
+  border: 2px solid #FFF;
+}
+
+.misreservas:active {
+  background:#FFF !important;
+  color: #5FC0DD !important;
+  border: 2px solid #FFF;
+}
+
+.misreservas:link {
+  color:#FFF !important;
+  background: #5FC0DD !important;
+  border: 2px solid #FFF;
+}
+
+/*perfil.view.html*/
+.vistaperfil .panel-body .input-group {
+  margin-bottom: 20px;
+}
+
+
+/*productos.view.html*/
+.productosview .glyphicon-shopping-cart {
+  background:black;
+  color: white;
+  padding: 3px;
+  border-radius: 2px;
+}
+
+
+.producto:hover {
+  cursor:pointer; cursor: hand;
+}
+
+.producto1:hover {
+  border:1px solid #377BB5;
+}
+
+
+.productosview img {
+  height: 80px;
+}
+
+.productosview .productoprecio {
+  color: #AF2913;
+}
+
+.productosview .navproductos {
+  margin-bottom: 20px;
+  height: 100%;
+}
+
+.productosview .inputprod {
+  width: 50px;
+  border-right: 1px solid grey;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
+  height: 36px;
+  padding: 2px;
+  padding-bottom: 5px; 
+}
+
+.productosstock {
+  padding: 3px;
+  color: #118814;
+  border-radius: 5px;
+
+}
+
+.imagenprincipal {
+  width: 250px;
+  margin-left: 14px;
+}
+
+.imagenespequenas {
+  margin-top:5px;
+  margin-left:14px;
+  width: 45px;
+  height: 45px;
+  box-sizing: border-box;
+}
+
+.imagenespequenas:hover {
+   border:1px solid #377BB5;
+}
+
+.imagenespequenas img {
+  height: 90%;
+  max-width: 90%;
+}
+
+.anchorimg:hover {
+  text-decoration: none;
+}
+
+.anchorimg:link {
+  text-decoration: none;
+}
+
+.anchorimg:active {
+  text-decoration: none;
+}
+
+.btncarrusel {
+  margin-top: 3px;
+}
+
+
+/*eventos.view.html*/
+.filtrofecha {
+  width: 90% !important;
+}
+
+.imageneventos {
+  height: 300px !important;
+}
+
+.inputReservas {
+  width: 100px !important;
+}
+
+
+/*gestionarproductos.view.html*/
+.imagengestion {
+  height: 70px;
+  margin-bottom: 10px;
+}
+
+#formupload .progress {
+  margin-top: 20px;
+  width: 40%;
+}
+
+/*gestionareventos.view.html*/
+.longitudevento {
+  width: 120px !important;
+  margin-bottom: 3px;
+}
+
+.participantesagregar {
+  border:1px solid #449d44;
+  background: #5cb85c;
+  color: #FFF;
+  border-radius: 2px;
+  padding: 3px;
+}
+
+.participanteseliminar {
+  border:1px solid red;
+  background: tomato;
+  color: #FFF;
+  border-radius: 2px;
+  padding: 3px;
+}
+
+.tablaparticipantes {
+  height:200px;
+  overflow-y: auto;
+}
+
+/*modal de google maps*/
+.angular-google-map-container{
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    right: 0;
+    left:0px;
+    margin: auto;  
+    width: 90%;
+    height: 90%;
+}
+
+#mMapa .modal-body{
+  height:300px !important;
+}
+
+/*tiendas*/
+.mitienda {
+  height: 350px !important;
+}
+
+/*home*/
+.carousel-inner img {
+  width: 100%;
+}
+
+/*Configuración de colores de bootstrap personalizada */
+.navbar-default {
+  background-color: #ffffff;
+  border-color: #ffffff;
+}
+.navbar-default .navbar-brand {
+  color: #6b6c6e;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #7d7b80;
+}
+.navbar-default .navbar-text {
+  color: #6b6c6e;
+}
+.navbar-default .navbar-nav > li > a {
+  color: #6b6c6e;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #7d7b80;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: #7d7b80;
+  background-color: #ffffff;
+}
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  color: #7d7b80;
+  background-color: #ffffff;
+}
+.navbar-default .navbar-toggle {
+  border-color: #ffffff;
+}
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
+  background-color: #ffffff;
+}
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #6b6c6e;
+}
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+  border-color: #6b6c6e;
+}
+.navbar-default .navbar-link {
+  color: #6b6c6e;
+}
+.navbar-default .navbar-link:hover {
+  color: #7d7b80;
+}
+
+
+/* Ancho #AF2913efinido para iPad y otras tablets */
+@media (max-width: 1030px) {
+  .navbar-header {
+      float: none;
+  }
+  .navbar-left,.navbar-right {
+      float: none !important;
+  }
+  .navbar-toggle {
+      display: block;
+  }
+  .navbar-collapse {
+      border-top: 1px solid transparent;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+  }
+  .navbar-fixed-top {
+      top: 0;
+      border-width: 0 0 1px;
+  }
+  .navbar-collapse.collapse {
+      display: none!important;
+  }
+  .navbar-nav {
+      float: none!important;
+      margin-top: 7.5px;
+  }
+  .navbar-nav>li {
+      float: none;
+  }
+  .navbar-nav>li>a {
+      padding-top: 10px;
+      padding-bottom: 10px;
+  }
+  .collapse.in{
+      display:block !important;
+  }
+
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #ffffff;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+    color: #ffffff;
+  }
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+    color: #ffffff;
+    background-color: #377BB5;
+  }
+
+  body {
+   height: 500px;
+}
+
+  .login {
+  	width: 80%;
+  }
+
+  .formlogin {
+  width: 90%;
+  margin:0 auto;
+}
+}

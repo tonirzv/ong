@@ -1,0 +1,101 @@
+<div class="row eventosview">
+	<div class="row">
+    <div class="col-md-12">
+  		<ul class="nav nav-pills nav-stacked">
+   			<li role="presentation">
+   				<form id="obtenereventos" name="obtenereventos">
+            <div class="panel panel-default text-center">
+              <div class="panel-body">
+                    <div class="row">
+                              <div class="col-md-5">
+                                  <div class="input-group spanfiltro">
+                                    <span class="input-group-addon spanfiltro" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span> Desde</span>
+                                    <input id="fecha1" type="date" min="1899-01-01" class="filtrofecha form-control" aria-describedby="basic-addon1">
+                                  </div>
+                              </div>
+                              <div class="col-md-5">
+                                <div class="input-group spanfiltro">
+                                  <span class="input-group-addon spanfiltro" id="basic-addon1"><span class="glyphicon glyphicon-calendar"></span> Hasta </span>
+                                  <input id="fecha2" type="date" min="1899-01-01" class="filtrofecha form-control" aria-describedby="basic-addon1">
+                                </div>
+                              </div>
+                              <div class="col-md-2">
+                        <button class="btn btn-primary btn-lg" ng-click="filtrar()">
+                                <i class="fas fa-search"></i>
+                                Buscar
+                        </button>
+                      </div>
+                    </div>
+                </div>
+            </div>
+   				</form>
+   			</li>
+  		</ul>		
+    </div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6 col-md-4" class="evento" ng-repeat="evento in eventos">
+			<a href ng-click="detalles()" class="anchorimg text-center">
+				<div class="thumbnail evento1">
+	      			<img class="imageneventos" src="img/eventos/{{evento.ruta}}" alt="">
+      				<div class="caption">
+	        			<h5>{{evento.nombre}}</h5>
+	        			<h4 class="eventoprecio">{{evento.precioentrada | euros:'€'}}</h4>
+	        			<p class="eventosstock text-center">Entradas disponibles: {{evento.entradasdisponibles}}</p>
+                <p class="eventosstock text-center">{{evento.lugar.nombre}}</p>
+	        			 <p class="text-center">{{ evento.fecha | vfecha}}</p>
+	      			</div>
+		   		</div>
+			</a>
+	  </div>
+	</div>
+</div>
+
+<!-- MODAL -->
+<div id="modaleventos" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{modal.titulo}}</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="row">
+      		<div class="col-md-6">
+      			<div class="row">
+      				<img src="img/eventos/{{modal.ruta}}" class="img-responsive img-thumbnail imagenprincipal" alt="Responsive image">
+      			</div>
+      		</div>
+      		<div class="col-md-6 text-center">
+      			<div class="panel panel-default">
+      				<div class="panel-heading">
+      					Participantes
+      				</div>
+      				<div class="panel-body">
+        				<p ng-repeat="participante in modal.participantes">
+        				· {{participante.nombre}} ({{participante.grupo.nombre}})
+        				</p>
+    					</div>
+      			</div>
+      			<h4>{{modal.descripcion}}</h4>
+      			<h3>Precio: {{modal.precio | euros:'€'}}</h3>
+      			<h5>Entradas disponibles: {{modal.entradasdisponibles}}</h5>
+				</div>
+      		</div>
+      	</div>
+      <div class="modal-footer">
+        	<button type="button" class="btn btn-danger pull-right" data-dismiss="modal">
+			<span class="glyphicon glyphicon-remove-sign"></span>
+        	Cerrar</button>
+      		<div class="input-group gruporeservas">
+		    	<span class="input-group-btn">
+		    	<button class="btn btn-primary" type="button" ng-click="reservarEvento()">
+		    	    <span class="glyphicon glyphicon-shopping-cart"></span>
+		     	   Reservar entrada/s
+		    	</button>
+		    	  </span>
+		      	<input type="number" min="1" max="{{modal.entradasdisponibles}}" class="form-control inputprod text-center inputReservas" placeholder="Cantidad" ng-model="modal.cantidad" value="1">
+	    	</div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

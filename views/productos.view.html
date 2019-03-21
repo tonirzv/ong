@@ -1,0 +1,110 @@
+<div class="row productosview">
+	<div class="row">
+		<div class="col-md-12">
+			<ul class="nav nav-pills nav-stacked">
+	 			<li role="presentation">
+	 				<form id="obtenerproductos" name="obtenerproductos">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-md-5">
+												<h5>Selecciona tu tienda: </h5>
+												<select name="tiendas" class="custom-select" ng-model="mistiendas">
+							  						<option value="todas" selected>Todas</option>
+							  						<option  ng-repeat="tienda in tiendas" value="{{tienda.id}}">
+							  						{{tienda.nombre}}
+							  						</option>
+												</select>
+											</div>
+											<div class="col-md-5">
+												<h5>Filtra por una categoría</h5>
+												<select name="categoria" ng-model="miscategorias" class="custom-select">
+							  						<option value="todas" selected>Todas</option>
+							  						<option  ng-repeat="categoria in categorias" value="{{categoria.id}}">
+							  						{{categoria.nombre}}
+							  						</option>
+												</select>
+											</div>
+											<div class="col-md-2">
+												<button class="btn btn-primary btn-lg" ng-click="filtrar()">
+													<i class="fas fa-search"></i>
+							 						Buscar
+							 					</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+	 				</form>
+	 			</li>
+			</ul>		
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6 col-md-3" class="producto" ng-repeat="producto in productos">
+			<a href ng-click="detalles()" class="anchorimg text-center">
+				<div class="thumbnail producto1">
+	      			<img src="img/{{producto.rutas.rutas[0]}}" alt="">
+      				<div class="caption">
+	        			<h5>{{producto.nombre}}</h5>
+	        			<h4 class="productoprecio">{{producto.precio | euros:'€'}}</h4>
+	        			<p class="productosstock text-center">Stock: {{producto.stock}}</p>
+	        			<p class="text-center">Tienda: {{producto.tienda.nombre}}</p>
+	      			</div>
+		   		</div>
+			</a>
+	  </div>
+	</div>
+</div>
+
+<!-- MODAL -->
+<div id="modalProductos" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{modal.titulo}}</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="row">
+      		<div class="col-md-6">
+      			<div class="row">
+	      			<div class="col-md-3 text-center">
+	      				<a href ng-repeat="imagen in modal.imagenes.rutas" class="anchorimg" ng-mouseover="mostrarImagenes()">
+	      					<div class="imagenespequenas img-thumbnail">
+	      						<img src="img/{{imagen}}">
+	      					</div>
+	      				</a>
+	      			</div>
+      				<div class="col-md-9 text-center">
+      					<img src="img/{{modal.imagenprincipal}}" class="img-responsive img-thumbnail imagenprincipal" alt="Responsive image">
+      				</div>
+      			</div>
+      		</div>
+      		<div class="col-md-6 text-center">
+      			<h4>{{modal.descripcion}}</h4>
+      			<h3>Precio: {{modal.precio | euros:'€'}}</h3>
+      			<h5>Stock: {{modal.stock}}</h5>
+      		</div>
+      	</div>
+      </div>
+      <div class="modal-footer">     
+        	<button type="button" class="btn btn-danger pull-right" data-dismiss="modal">
+			<span class="glyphicon glyphicon-remove-sign"></span>
+        	Cerrar</button>
+      		<div class="input-group">
+		    	<span class="input-group-btn">
+		    	<button class="btn btn-primary" type="button" ng-click="reservarProducto()">
+		    	    <span class="glyphicon glyphicon-shopping-cart"></span>
+		     	   Reservar
+		    	</button>
+		    	  </span>
+		      	<input type="number" class="form-control inputReservas text-center" placeholder="Cantidad" ng-model="modal.cantidad">
+	    	</div>
+
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

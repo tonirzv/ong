@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="ongApp">
+<head>
+	<meta charset="UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title></title>
+	<!-- Primero carga normalize, luego bootstrap y después el css propio -->
+	<link rel="stylesheet" href="../app/normalize/normalize.css"/>
+	<link rel="stylesheet" href="../app/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/estilos.css"/>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
+	<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+
+</head>
+<body ng-controller="mainCtrl">
+	
+	<div class="container">
+		<cabecera></cabecera>
+		<div ng-view></div>
+	</div>
+	<script src="../app/jquery/jquery.js"></script>		
+	<script src="../app/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../app/protos.js"></script>
+	<script src="../app/angular/angular.js"></script>
+	<script src="../app/angular/ngRoute.js"></script>
+	<script src="js/main.js"></script>
+	<script src="plugins/showdialog.js"></script>
+	<script src="comp/comunes/registro.js"></script>
+	<script src="comp/comunes/productos.js"></script>
+	<script src="comp/comunes/eventos.js"></script>
+	<script src="comp/comunes/cabecera.js"></script>
+	<script src="comp/comunes/tiendas.js"></script>
+	<script src="comp/comunes/perfil.js"></script>
+	<script src="comp/comunes/reservas.js"></script>
+	<script src="comp/gestor/gestionproductos.js"></script>
+	<script src="comp/gestor/gestionareventos.js"></script>
+	<script src="comp/gestor/gestionargrupos.js"></script>
+	<script src="comp/gestor/gestionarparticipantes.js"></script>
+	<script src="comp/admin/administrareventos.js"></script>
+	<script src="comp/admin/administrarproductos.js"></script>
+	<script src="comp/admin/administrareservas.js"></script>
+	<script src="comp/admin/administrartiendas.js"></script>
+    <script type="text/javascript"  src="https://maps.google.com/maps/api/js?key=AIzaSyD8JqkOXRrJ76K1Y_NmuXV7p02wwyfsiWc"></script>
+    <script src="plugins/googlemaps/js/lib/lodash.underscore.min.js?v=2.4.1"></script>
+    <script src="plugins/googlemaps/js/lib/angular-google-maps.min.js?v=1.2.2"></script>
+</body>
+</html>

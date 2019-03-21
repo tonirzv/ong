@@ -1,0 +1,98 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="text-center">
+			<span class="glyphicon glyphicon-th-list"></span> 
+			Gestor de grupos
+		</h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responsive">
+			<table class="table table-condensed">
+				<caption class="text-center">Tiendas <span class="badge">{{cantidad}}</span></caption>
+				<tr>
+					<th>ID</th>
+					<th>CIF</th>
+					<th class="text-center">Nombre</th>
+					<th class="text-right">Domicilio Fiscal</th>
+					<th class="text-center">Página WEB</th>
+					<th class="text-center"><button ng-click="agregar()" class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Nuevo grupo</button></th>
+				</tr>
+				<tr ng-repeat="grupo in grupos">
+					<td>{{grupo.id}}</td>
+					<td>{{grupo.cif}}</td>
+					<td>{{grupo.nombre}}</td>
+					<td class="text-center">{{grupo.domiciliofiscal}}</td>
+					<td class="text-right">{{grupo.web}}</td>
+					<td class="text-center">
+						<button ng-click="modifica()" class="btn btn-primary">
+							<span class="glyphicon glyphicon-pencil"></span>
+							 Editar grupo
+						</button>
+					</td>
+				</tr>
+			</table>	
+		</div>		
+	</div>
+</div>
+<!-- Mi modal -->
+<div class="modal fade" id="mRef" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header {{modal.bcolor}}">
+        <h4 ng-model="modal.datos.referencia" class="modal-title" id="titboton">
+        	<span class="pull-left"  class="glyphicon glyphicon-pencil"></span>{{modal.opcion}} | {{modal.datos.nombre}}
+          <span class="pull-right" >{{modal.fecha}}</span>
+		</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="panel {{modal.pcolor}}">
+      		<div class="panel-body">
+		        <form id="formModal">
+	        		<div class="row">
+		        		<div class="col-md-4">
+		        			<div class="form-group">
+		        				<label for="nombre">Nombre </label>
+		        				<input type="text" class="form-control" id="nombre" ng-model="modal.datos.nombre" required>
+		        			</div>
+		        		</div>
+		        		<div class="col-md-8">
+		           			<div class="form-group">
+		        				<label for="domiciliofiscal">Domicilio fiscal</label>
+		        				<input ng-model="modal.datos.domiciliofiscal" type="text" class="form-control" id="domiciliofiscal" required>
+		        			</div>
+		        		</div>
+		        	</div>
+	        		<div class="row">
+	        			<div class="col-md-4">
+		        			<div class="form-group">
+		        				<label for="id">ID </label>
+		        				<input type="text" class="form-control" id="id" ng-model="modal.datos.id" disabled>
+		        			</div>
+	        			</div>
+	        			<div class="col-md-4">
+		        			<div class="form-group">
+		        				<label for="cif">CIF</label>
+		        				<div class="input-group">
+		        					<input ng-model="modal.datos.cif" type="text" class="form-control" id="cif" required>
+		        				</div>
+		        			</div>
+	        			</div>
+	        			<div class="col-md-4">
+		        			<div class="form-group">
+		        				<label for="web">Página web </label>
+		        				<input ng-model="modal.datos.web" type="text" class="form-control" id="web" required>
+		        			</div>
+	        			</div>
+	        		</div>
+		        </form>
+      		</div>
+      	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><span class="	glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+        <button type="button" ng-click="accion()" class="btn {{modal.cboton}}" name="enviar" id="guarda">{{modal.boton}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+	

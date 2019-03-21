@@ -1,0 +1,261 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="text-center">
+			<span class="glyphicon glyphicon-th-list"></span> 
+			Gestión de productos
+		</h3>
+	</div>
+	<div class="panel-body">
+		<div class="table-responsive">
+			<table class="table table-condensed">
+				<caption class="text-center">Productos <span class="badge">{{cantidad}}</span></caption>
+				<tr>
+					<th>ID</th>
+					<th>Imágenes</th>
+					<th>Nombre</th>
+					<th>Stock</th>
+					<th>Precio</th>
+					<th>Fecha</th>
+					<th>Tienda</th>
+					<th>Estado</th>
+					<th class="text-center"><button ng-click="agregar()" class="btn btn-success longitudevento"><span class="glyphicon glyphicon-plus"></span> Nuevo </button><br>
+						<button ng-click="agregarExistente()" class="btn btn-success longitudevento"><span class="glyphicon glyphicon-plus"></span> Existente</button></th>
+				</tr>
+				<tr ng-repeat="producto in productos">
+					<td>{{producto.id}}</td>
+					<td>
+						<img src="img/{{producto.rutas.rutas[0]}}" alt="{{producto.rutas.rutas[0]}}" class="imagengestion">
+					</td>
+					<td>{{producto.nombre}}</td>
+					<td class="text-center">{{producto.stock}}</td>
+					<td class="text-right">{{producto.precio | euros:'€'}}</td>
+					<td><input type="date" data-date-format="dd/mm/yyyy" ng-model="producto.fecha" disabled></td>
+					<td>{{producto.tienda.nombre}} ({{producto.tienda.id}})</td>
+					<td>{{producto.estado}}</td>
+					<td class="text-center">
+						<button ng-click="modifica()" class="btn btn-primary btn-xs longitudevento">
+							<span class="glyphicon glyphicon-pencil"></span>
+							 Producto
+						</button><br>
+						<button ng-click="modificaImg()" class="btn btn-warning btn-xs longitudevento">
+							<span class="glyphicon glyphicon-pencil"></span>
+							 Imagenes
+						</button>
+					</td>
+				</tr>
+			</table>	
+		</div>		
+	</div>
+</div>
+<!-- Mi modal -->
+<div class="modal fade" id="mRef" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header {{modal.bcolor}}">
+        <h4 ng-model="modal.datos.referencia" class="modal-title" id="titboton">
+        	<span class="pull-left"  class="glyphicon glyphicon-pencil"></span>{{modal.opcion}} | {{modal.datos.nombre}}
+          <span class="pull-right" >{{modal.fecha}}</span>
+		</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="panel {{modal.pcolor}}">
+      		<div class="panel-body">
+        		<div class="row">
+	        		<div class="col-md-3">
+	        			<div class="form-group" ng-if="disabledNombre">
+	        				<label for="nombre">Nombre </label>
+	        				<input name="nombre" type="text" class="form-control" id="nombre" ng-model="modal.datos.nombre" required>
+	        			</div>
+	        		</div>
+	        		<div class="col-md-9" ng-if="disabledDescripcion">
+	           			<div class="form-group">
+	        				<label for="descripcion">Descripción </label>
+	        				<input ng-model="modal.datos.descripcion" type="text" class="form-control" required>
+	        			</div>
+	        		</div>
+	        	</div>
+        		<div class="row">
+        			<div class="col-md-3" ng-if="disabledPrecio">
+	        			<div class="form-group">
+	        				<label for="precio">Precio</label>
+	        				<div class="input-group">
+	        					<input ng-model="modal.datos.precio" name="precio" type="text" class="form-control" required>
+	        				</div>
+	        			</div>
+        			</div>
+        			<div class="col-md-2">
+	        			<div class="form-group" ng-if="disabledStock"> 
+	        				<label for="stock">Stock </label>
+	        				<input ng-model="modal.datos.stock" name="stock" type="text" class="form-control" id="stock" required>
+	        			</div>
+        			</div>
+        			<div class="col-md-3" ng-if="disabledImgs">
+        			
+	        		</div>
+        		</div>
+	           	<div class="row">
+	           		<div class="col-md-4">
+	           			<div class="form-group" ng-if="disabledCategoria">
+	        				<label for="categoria">Categoria </label><br>
+	        				<select ng-model="modal.datos.categoria" class="custom-select" required>
+		  						<option  ng-repeat="categoria in categorias" value="{{categoria.id}}">
+		  						{{categoria.nombre}}
+		  						</option>
+							</select>
+	        			</div>
+	           		</div>
+	           		<div class="col-md-4">
+	           			<div class="form-group" ng-if="disabledFecha">
+	        				<label for="fecha">Fin de campaña</label>
+	        				<input ng-model="modal.datos.fecha" data-date-format="dd/mm/yyyy" name="fecha" type="date" class="form-control" id="fecha" required>
+	        			</div>
+	           		</div>
+	           		<div class="col-md-4" ng-if="disabledTiendaSelected">
+	           			<div class="form-group">
+	        				<label for="tienda">Tienda </label><br>
+	        				<select ng-model="modal.datos.tienda.id" class="custom-select" disabled>
+		  						<option  ng-repeat="tienda in tiendas" value="{{tienda.id}}">{{tienda.nombre}}
+		  						</option>
+							</select>
+	        			</div>
+	           		</div>
+	           		<div class="col-md-4" ng-if="disabledTiendaSelect">
+	           			<div class="form-group">
+	        				<label for="tienda">Tienda </label><br>
+	        				<select ng-model="modal.datos.tienda" class="custom-select">
+		  						<option  ng-repeat="tienda in tiendas" value="{{tienda.id}}">
+		  						{{tienda.nombre}}
+		  						</option>
+							</select>
+	        			</div>
+	           		</div>
+	           	</div>
+      		</div>
+      	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><span class="	glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+        <button type="button" ng-click="accion()" class="btn {{modal.cboton}}" name="enviar" id="guarda">{{modal.boton}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2 -->
+<div class="modal fade" id="mRef2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header {{modal.bcolor}}">
+        <h4 ng-model="modal.datos.referencia" class="modal-title" id="titboton">
+        	<span class="pull-left glyphicon glyphicon-pencil"></span> {{modal.opcion}}
+		</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="panel panel-default">
+      		<div class="panel-heading">
+      			Escoge un producto
+      		</div>
+      		<div class="panel-body">
+      			<div class="row">
+      				<div class="col-md-12">	
+      					<div class="form-group">
+		        			<label for="producto">Producto </label><br>
+		        			<select ng-model="modal.datos.productoid" class="custom-select" required>
+			  					<option  ng-repeat="producto in productosexistentes" value="{{producto.id}}">
+			  					{{producto.id}} - {{producto.nombre}}
+			  					</option>
+							</select>
+		        		</div>
+      				</div>
+      				<div class="col-md-12">	
+      					<div class="form-group">
+		        			<label for="producto">Tienda </label><br>
+		        			<select ng-model="modal.datos.tiendaid" class="custom-select" required>
+			  					<option  ng-repeat="tienda in tiendas" value="{{tienda.id}}">
+			  					{{tienda.id}} - {{tienda.nombre}} - {{tienda.direccion}}
+			  					</option>
+							</select>
+		        		</div>
+      				</div>
+      			</div>
+      			<div class="row">
+      				<div class="col-md-6">
+      					<div class="form-group" ng-id="disabledStock"> 
+		        			<label for="stock">Stock </label>
+		        			<input ng-model="modal.datos.stock" name="stock" type="text" class="form-control" required>
+		        		</div>
+      				</div>
+      				<div class="col-md-6">
+      					<div class="form-group">
+		        			<label for="precio">Precio</label>
+		        			<div class="form-group">
+		        				<input ng-model="modal.datos.precio" name="precio" type="text" class="form-control" required>
+		        			</div>
+		        		</div>
+      				</div>
+      			</div>
+      		</div>
+      	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove-circle"></span> Cancelar</button>
+        <button type="button" ng-click="accion()" class="btn {{modal.cboton}}" name="enviar" id="guarda">{{modal.boton}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="mRef3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header {{modal.bcolor}}">
+        <h4 ng-model="modal.datos.referencia" class="modal-title" id="titboton">
+        	<span class="pull-left"  class="glyphicon glyphicon-pencil"></span>{{modal.opcion}}  {{modal.datos.nombre}}
+          <span class="pull-right" >{{modal.fecha}}</span>
+		</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="panel {{modal.pcolor}}">
+      		<div class="panel-body">
+		      <div class="row">
+		      	<div class="col-md-4" ng-repeat="ruta in modal.datos.rutas.rutas">
+			      	<div class="panel panel-default" ng-style="myStyle">
+			      		<div class="panel-body text-center">
+							<img src="img/{{ruta}}" alt="{{ruta}}" class="imagengestion"><br>
+							<button class="btn btn-danger" ng-click="myStyle={border:'1px solid red'};agregarAeliminar()">X</button>
+			      		</div>
+			      	</div>
+		      	</div>
+		      	<div class="row">
+		      		<div class="col-md-12">
+			      		<div class="text-center">
+			      			<button class="btn btn-danger" ng-click="eliminarImagenes()">
+			      				Eliminar imágenes
+			      			</button>
+			      		</div>
+		      		</div>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="col-md-12">
+				<hr>
+				<form class="text-center">
+	                <input type="file" name="files" subir-imagen="file" multiple="multiple" /><br>
+					<button class="btn btn-info upload" ng-click="accion()">
+						<span class="glyphicon glyphicon-cloud-upload"></span>
+						{{modal.boton}}
+					</button>
+            	</form>
+		      	</div>
+		      </div>
+      		</div>
+      	</div>
+      </div>
+      <div class="modal-footer text-center">
+        <button type="button" data-dismiss="modal" class="btn {{modal.cboton}} pull-center" name="enviar" id="guarda"><span class="glyphicon glyphicon-saved"></span> Terminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
